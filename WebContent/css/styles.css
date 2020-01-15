@@ -1,0 +1,47 @@
+/*body, html{
+    height:100%;
+   /* background-image:url("/bankF.jpg")
+    background-image: linear-gradient(lightblue ,rgb(35, 6, 165));*/
+}*/
+body{
+background: url("images/bankF.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+
+.back{
+    background-image:url("images/bankF.jpg");
+    padding: 1rem;
+    color: white;
+    
+}
+.portada{
+    background-image:url("/bankF.jpg");
+}
+h1{
+    text-align: center;
+    padding-top: 2rem;
+    }
+
+
+.page-holder {
+  min-height: 100vh;
+}
+
+.bg-cover {
+  background-size: cover !important;
+
+}
+#fml{
+	color: white;
+}
+
+h2{
+	color: white;
+}
+#errorMessage{
+	color: red;
+}

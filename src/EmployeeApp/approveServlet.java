@@ -1,26 +1,23 @@
 package EmployeeApp;
 
-
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-
-
-
-
+import com.google.gson.Gson;
+import EmployeeApp.Clients;
 
 /**
  * Servlet implementation class approveServlet
@@ -38,105 +35,60 @@ public class approveServlet extends HttpServlet {
 
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		PrintWriter out = response.getWriter();
-		
-//		String id_client = "", firstname = "", lastname = "", street = "", city = "", zip = "", state = "", username = "", m_incomes = "", m_expenses = "";
 
 		String myDB = "jdbc:oracle:thin:@localhost:1521:xe";
 		String c_user="java";
 		String c_pass= "java";
 		try {
-			response.setContentType("html/text");
+			response.setContentType("text/html");
 			Class.forName("oracle.jdbc.driver.OracleDriver");  
 			Connection connection = DriverManager.getConnection(myDB, c_user, c_pass);
-			PreparedStatement ps = connection.prepareStatement("SELECT ID_CLIENT, FIRST_NAME, LAST_NAME, STREET, CITY, ZIP_CODE, STATE, USERNAME, M_INCOMES, M_EXPENSES FROM Client WHERE M_INCOMES > 0 AND M_EXPENSES > 0");
+			PreparedStatement ps = connection.prepareStatement("SELECT ID_CLIENT, FIRST_NAME, LAST_NAME, STREET, CITY, ZIP_CODE, STATE, USERNAME, M_INCOMES, M_EXPENSES FROM Client WHERE M_INCOMES > 0 AND M_EXPENSES > 0 AND APPLY = 'N'");
 			
 			ResultSet rs = ps.executeQuery();
-			JsonObject jsonResponse = new JsonObject();
-			JsonArray data = new JsonArray();
 			
+			List<Clients> clientlist = new ArrayList<Clients>();
 			
-			while(rs.next()) {
-				JsonArray row = new JsonArray();
-				row.add(new JsonPrimitive(rs.getInt("ID_CLIENT")));
-				row.add(new JsonPrimitive(rs.getString("FIRST_NAME")));
-				row.add(new JsonPrimitive(rs.getString("LAST_NAME")));
-				row.add(new JsonPrimitive(rs.getString("STREET")));
-				row.add(new JsonPrimitive(rs.getString("CITY")));		
-				row.add(new JsonPrimitive(rs.getString("ZIP_CODE")));
-				row.add(new JsonPrimitive(rs.getString("STATE")));
-				row.add(new JsonPrimitive(rs.getString("USERNAME")));
-				row.add(new JsonPrimitive(rs.getString("M_INCOMES")));
-				row.add(new JsonPrimitive(rs.getString("M_EXPENSES")));	
-				data.add(row);
+
+			
+			while(rs.next()){
 				
-			}
+				Clients client = new Clients();
+				client.setId_client(rs.getInt("ID_CLIENT")); 
+				client.setFirstname(rs.getString("FIRST_NAME"));
+				client.setLastname(rs.getString("LAST_NAME"));
+				client.setStreet(rs.getString("STREET"));
+				client.setCity(rs.getString("CITY"));
+				client.setZip(rs.getString("ZIP_CODE"));
+				client.setState(rs.getString("STATE"));
+				client.setUsername(rs.getString("USERNAME"));
+				client.setM_incomes(rs.getDouble("M_INCOMES"));
+				client.setM_expenses(rs.getDouble("M_EXPENSES"));
+
+				
+				
+		
+			clientlist.add(client);
+;
+		}	
 			
-			jsonResponse.add("ResponseData", data);
+		Gson gson = new Gson();
+	
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			
-			out.print(jsonResponse);
-			out.flush();
-			System.out.println(jsonResponse);
-			
-			
-			try {
-		         FileWriter file = new FileWriter("client.json");
-		         file.write(jsonResponse.toString());
-		         file.close();
-		      } catch (IOException e) {
-		         // TODO Auto-generated catch block
-		         e.printStackTrace();
-		      }
-		      System.out.println("JSON file created......");
-			
-/*			while(rs.next()) {
-				String id_client = rs.getString("ID_CLIENT");
-				firstname = rs.getString("first_name");
-				lastname = rs.getString("last_name");
-				street = rs.getString("street");
-				city = rs.getString("city");
-				zip = rs.getString("zip_code");
-				state = rs.getString("state");
-				username = rs.getString("username");
-				m_incomes = Double.toString(rs.getDouble("m_incomes"));
-				m_expenses = Double.toString(rs.getDouble("m_expenses"));
-				
-				client.put("id_client", id_client);
-				client.put("firstname",firstname);
-				client.put("lastname", lastname);
-				client.put("street", street);				
-				client.put("city", city);
-				client.put("zip", zip);
-				client.put("state", state);
-				client.put("username", username);
-				client.put("m_incomes",m_incomes);
-				client.put("m_expenses", m_expenses);
-				
-				System.out.println(client);
-				System.out.println(client.get("firstname"));
-				
-				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-				String jsonClient = gson.toJson(client);
-				System.out.println(jsonClient);*/
-				
-				
-				/*
-				 * System.out.println(firstname); System.out.println(lastname);
-				 * System.out.println(street); System.out.println(city);
-				 * System.out.println(zip); System.out.println(state);
-				 * System.out.println(username);
-				 */
-			
-			
-		
+			out.print(gson.toJson(clientlist));
 		
 		}catch(Exception e){
 		   e.printStackTrace();
 	   }
 		
 	}
-
 }
+	
+	
+		
+
+

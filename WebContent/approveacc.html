@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/approveacc.css>
+	<link rel="stylesheet" href="css/approveacc.css">
 		
     <title>User</title>
   </head>
@@ -22,9 +22,16 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
                 <a class="nav-item nav-link pl-3" href="approveacc.html">Approve Account </a>
-                <a class="nav-item nav-link pl-5" href="deposit.html">View Accounts</a>
-                <a class="nav-item nav-link pl-5" href="#">All transactions</a>
-                <a class="nav-item nav-link pl-5" href="#">Exit</a>
+                <a class="nav-item nav-link pl-5" href="viewacc.html">View Accounts</a>
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		All transactions</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="EmployeeListChByClient.html">Checking account</a>
+          				<a class="dropdown-item" href="EmployeeListSvByClient.html">Savings account</a>          				
+        			</div>
+      			</li>
+                <a class="nav-item nav-link pl-5" href="emp_login.html">Exit</a>
                
           </div>
         </div>
@@ -32,13 +39,21 @@
       
       
       <div class="container approve_acc">
-      <br><h1>ACCOUNTS PENDING TO APPROVE</h1><br>
+      <h1>ACCOUNTS PENDING TO APPROVE</h1>
       </div>
-      <div class="container tablepending">
-      <form action = "approve_acc" method="post">
-      <button type="submit" value = "search" onclick= "Client" class="btn btn-primary">List pending Accounts</button>
-      </form>
-      <table class="table table-striped">
+      <div class="container">
+   <!--    <form method="post" id="clientform"> -->
+      <button type="submit" value = "search" id="clients" onclick="getclient()" class="btn btn-primary">List pending Accounts</button>
+      <div class="container" id="here">
+      
+      </div>
+     <!--  </form> -->
+         
+         </div> 
+         
+         <hr> 
+         <div class="container">
+             <table class="table table-striped">
   		<thead>
     <tr>
       <th scope="col">Id_Client</th>
@@ -51,37 +66,70 @@
       <th scope="col">Username</th>
       <th scope="col">Monthly incomes</th>
       <th scope="col">Monthly expenses</th>
-   
+   <hr>
     </tr>
   </thead>
-  <tbody id="test">
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  <tbody id="content">   
   </tbody>
-</table>        
-         </div>  
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="clientinfo.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</table> 
+         
+         </div>
+         
+  <div class="container">
+  <h3>Select client to be approve:</h3>
+  <form class="form-inline" action = "newclient" method="POST">
+  <div class="form-group mb-2">
+    <label for="clienttoapp" class="sr-only">Email</label>
+    <input type="text" readonly class="form-control-plaintext" id="clienttoapp" value="Client's username">
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="clienttoapp" class="sr-only">Password</label>
+    <input type="text" class="form-control" name= "approvedClient" id="approvedClient" placeholder="Client's username">
+  </div>
+  <button type="submit" name= "NewClients" value= "NewClients" class="btn btn-primary mb-2">Confirm</button>
+</form>
+  
+  </div>
+         
+         
+   <script>
+   var content = document.querySelector('#content')
+	  	function getclient(){
+   			fetch('http://localhost:1235/BankApp_P1/approveacc')
+   				.then( res => res.json())
+   				.then( data => {
+   					//	console.log(data)
+   					table(data)
+   			})
+   	}
+   	
+   	function table(data){
+   		//console.log(data)
+   		window.top.innerHTML = ''
+   		content.innerHTML=' '
+   		for(let value of data){
+   			content.innerHTML += `
+   				<tr>
+	   		      <th scope="row">${value.id_client}</th>
+	   		      <td>${value.firstname}</td>
+	   		      <td>${value.lastname}</td>
+	   		      <td>${value.street}</td>
+	   		      <td>${value.city}</td>
+	   		      <td>${value.zip}</td>
+	   		      <td>${value.state}</td>
+	   		      <td>${value.username}</td>
+	   		      <td>${value.m_incomes}</td>
+	   		      <td>${value.m_expenses}</td>
+   		    </tr>`
+   		}
+   	}
+   
+   </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+      
+    
   </body>
 </html>

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +27,15 @@ public class FirstServlet extends HttpServlet {
 		String n=request.getParameter("username");
 		String p=request.getParameter("password");
 		
-		
+		HttpSession session = request.getSession();
+		session.setAttribute("username", n);
 		
 		if(DaoLog.validate(n, p)){
 			RequestDispatcher rd=request.getRequestDispatcher("user.html");
 			rd.forward(request,response);
-			HttpSession session = request.getSession();
-			session.setAttribute("username", n);
+			Cookie ck = new Cookie("username", n);
+			response.addCookie(ck);
+
 		}
 		else{
 			

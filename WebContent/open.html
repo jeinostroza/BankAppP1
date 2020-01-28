@@ -13,18 +13,48 @@
   <body>
     <div class="container col-10">
       <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">INOS BANK</a>
+        <a class="navbar-brand" href="index.html">INOS BANK</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-                <a class="nav-item nav-link pl-3" href="open.html">Open an Account </a>
-                <a class="nav-item nav-link pl-5" href="deposit.html">Deposit</a>
-                <a class="nav-item nav-link pl-5" href="#">Withdraw</a>
-                <a class="nav-item nav-link pl-5" href="#">Transfer</a>
-                <a class="nav-item nav-link pl-5" href="#">Balance</a>
-                <a class="nav-item nav-link pl-5" href="#">Exit</a>
+                <a class="nav-item nav-link pl-5" href="open.html">Open an Account </a>
+                
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Deposit</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="dep_ch.html">Checking</a>
+          				<a class="dropdown-item" href="dep_sv.html">Savings</a>          				
+        			</div>
+      			</li>
+      			<li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Withdraw</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="wit_ch.html">Checking</a>
+          				<a class="dropdown-item" href="wit_sv.html">Savings</a>          				
+        			</div>
+      			</li>
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Transfer</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="transfer_ch_sv.html">Savings to Checking</a>
+          				<a class="dropdown-item" href="transfer_sv_ch.html">Checking to Savings</a>          				
+        			</div>
+      			</li>
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Statement</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="transactions_ch.html">Checking account</a>
+          				<a class="dropdown-item" href="transactions_sv.html">Savings account</a>          				
+        			</div>
+      			</li>
+                <a class="nav-item nav-link pl-5" href="balance.html">Balance</a>
+                <a class="nav-item nav-link pl-5" href="index.html">Exit</a>
           </div>
         </div>
       </nav>
@@ -36,12 +66,12 @@
       <form action="openconfirm" method="POST">
         <div class="form-row">
           <div class="form-group csubmitol-md-6">
-            <label for="text">Monthly Incomes</label>
-            <input type="text" name= "monthlyIncomes"class="form-control" id="inputincomes" placeholder="Monthly Incomes">
+            <label for="text">Annual Income</label>
+            <input type="text" name= "monthlyIncomes"class="form-control" id="inputincomes" placeholder="Annual Income">
           </div>
           <div class="form-group col-md-6">
-            <label for="lastname">Monthly Expenses</label>
-            <input type="text" name="monthlyExpenses"class="form-control" id="inputexpenses" placeholder="Monthly Expenses">
+            <label for="lastname">Annual Expenses</label>
+            <input type="text" name="monthlyExpenses"class="form-control" id="inputexpenses" placeholder="Annual Expenses">
           </div>
         </div>
     

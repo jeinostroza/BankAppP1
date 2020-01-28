@@ -1,10 +1,10 @@
 function validateUser(){
 	let userid = document.getElementById("username").value;
 	let userpassword=document.getElementById("password").value;
-	console.log(userid + " " + userpassword);
+//	console.log(userid + " " + userpassword);
 	var message="";
 	var flag=true;
-	if(userid==" "){
+	if(userid==""){
 		message="Invalid Username";
 		flag=false;
 	}

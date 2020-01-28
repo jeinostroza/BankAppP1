@@ -22,9 +22,9 @@
           <div class="navbar-nav">
                 <a class="nav-item nav-link pl-3" href="open.html">Open an Account </a>
                 <a class="nav-item nav-link pl-5" href="deposit.html">Deposit</a>
-                <a class="nav-item nav-link pl-5" href="#">Withdraw</a>
-                <a class="nav-item nav-link pl-5" href="#">Transfer</a>
-                <a class="nav-item nav-link pl-5" href="#">Balance</a>
+                <a class="nav-item nav-link pl-5" href="withdraw.html">Withdraw</a>
+                <a class="nav-item nav-link pl-5" href="transfer.html">Transfer</a>
+                <a class="nav-item nav-link pl-5" href="balance.html">Balance</a>
                 <a class="nav-item nav-link pl-5" href="#">Exit</a>
           </div>
         </div>
@@ -36,21 +36,42 @@
       <div class="row ">
         <div class="col ml-4">
         <h1>DEPOSIT</h1>
-        <P>Please complete the folowing information</P>
+        <P>Please complete the following information</P>
         <form action="deposit" method="POST">
-          <div class="form-row">
+        <div class="form-check">
+  			<input class="form-check-input" type="radio" name="account" id="ch_acc" value="ch_acc" checked>
+  			<label class="form-check-label" for="Radios1">
+    			Checking Account
+  			</label>
+		</div>
+		<div class="form-check">
+  			<input class="form-check-input" type="radio" name="account" id="sv_acc" value="sv_acc">
+  			<label class="form-check-label" for="Radios2">
+    			Savings Account
+  			</label>
+		</div>
+		
+          <div class="form-row my-5">
             <div class="form-group">
-              <label for="text">Deposit Amount</label>
-              <input type="text" name= "deposit" class="form-control" id="depositAmount" placeholder="Deposit Amount">
+              <label for="text">Description</label>
+              <input type="text" name= "depositDesc" class="form-control" id="depositDesc" placeholder="Description">
             </div>
             
+            <br>
           </div>
-      
+      <div class="form-row my-5">
+            <div class="form-group">
+              <label for="text">Deposit Amount</label>
+              <input type="text" name= "depositamount" class="form-control" id="depositAmount" placeholder="Deposit Amount">
+            </div>
+            
+            <br>
+          </div>
       <button type="submit" value="login"class="btn btn-primary" href="" >Submit</button>
     </form>
       </div>
       <div class="col">
-        <img src="deposit1.jpg"class="rounded float-left">
+        <img src="images/deposit1.jpg"class="rounded float-left">
     </div>
 </div></div>
 

@@ -10,7 +10,7 @@
 
     <title>User</title>
   </head>
-  <body>
+  <body class="portada"style=" background: url(images/226.jpg) no-repeat center center fixed">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="index.html">INOS BANK</a>
@@ -19,12 +19,42 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-                <a class="nav-item nav-link pl-3" href="open.html">Open an Account </a>
-                <a class="nav-item nav-link pl-5" href="deposit.html">Deposit</a>
-                <a class="nav-item nav-link pl-5" href="#">Withdraw</a>
-                <a class="nav-item nav-link pl-5" href="#">Transfer</a>
-                <a class="nav-item nav-link pl-5" href="#">Balance</a>
-                <a class="nav-item nav-link pl-5" href="#">Exit</a>
+                <a class="nav-item nav-link pl-5" href="open.html">Open an Account </a>
+                
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Deposit</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="dep_ch.html">Checking</a>
+          				<a class="dropdown-item" href="dep_sv.html">Savings</a>          				
+        			</div>
+      			</li>
+      			<li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Withdraw</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="wit_ch.html">Checking</a>
+          				<a class="dropdown-item" href="wit_sv.html">Savings</a>          				
+        			</div>
+      			</li>
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Transfer</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="transfer_ch_sv.html">Savings to Checking</a>
+          				<a class="dropdown-item" href="transfer_sv_ch.html">Checking to Savings</a>          				
+        			</div>
+      			</li>
+                <li class="nav-item dropdown pl-5">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Statement</a>
+        			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          				<a class="dropdown-item" href="transactions_ch.html">Checking account</a>
+          				<a class="dropdown-item" href="transactions_sv.html">Savings account</a>          				
+        			</div>
+      			</li>
+                <a class="nav-item nav-link pl-5" href="balance.html">Balance</a>
+                <a class="nav-item nav-link pl-5" href="index.html">Exit</a>
           </div>
         </div>
       </nav>

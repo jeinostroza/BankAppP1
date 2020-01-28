@@ -1,0 +1,1 @@
+{zip=75013, m_expenses=65000, m_incomes=95000, id_client=288.0, street=Allen, last_name=Rios, state=TX, first_name=Yolanda, username=yerios}

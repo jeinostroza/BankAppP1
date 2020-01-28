@@ -28,26 +28,25 @@ public class LoginEmplServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter pw= response.getWriter();
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
-		String n=request.getParameter("username");
-		String p=request.getParameter("password");
-	
-		
-		System.out.println(n + " " + p);
-		
-		
-		if(n == "employee" && p == "123456") {
-			RequestDispatcher rd=request.getRequestDispatcher("employee.html");
+
+		String user=request.getParameter("username");
+		String pass=request.getParameter("password");
+
+		if(user.equals("employee")&&pass.equals("123456")) {
+				RequestDispatcher rd=request.getRequestDispatcher("employee.html");
+				rd.forward(request,response);
+				HttpSession session = request.getSession();
+				session.setAttribute("user_empl", user);
+		}else {
+			RequestDispatcher rd=request.getRequestDispatcher("rejectemp.html");
 			rd.forward(request,response);
 			HttpSession session = request.getSession();
-			session.setAttribute("user_empl", n);
+			session.setAttribute("rejectemp.html", user);
+			pw.close();
 		}
-		else {
-			RequestDispatcher rd=request.getRequestDispatcher("rejectempl.html");
-			rd.include(request,response);
-		}
-	}
+		
 
+	}
 }
